@@ -37,16 +37,51 @@ class Line(object):
         if self.check():
             for i in self.commands:
                 i = i.replace("RND(1) ", str(random()))
-                """
-                try:
-                    i.replace("RND(1) ", str(Random()))
-                except Exception as error:
-                    print("RND(1) Error")
-                    print(error)
-                    """
+                if " ** " in i and not "\"" in i:
+                    i2 = i.split(" ")
+                    location = i2.index("**")
+                    value1 = i2[location - 1]
+                    value2 = i2[location + 1]
+                    value = float(value1) ** float(value2)
+                    i = i.replace((str(value1) + " ** " + str(value2)), ("\"" + str(value) + "\""))
+                if " * " in i and not "\"" in i:
+                    i2 = i.split(" ")
+                    location = i2.index("*")
+                    value1 = i2[location - 1]
+                    value2 = i2[location + 1]
+                    value = float(value1) * float(value2)
+                    i = i.replace((str(value1) + " * " + str(value2)), ("\"" + str(value) + "\""))
+                elif " / " in i and not "\"" in i:
+                    i2 = i.split(" ")
+                    location = i2.index("/")
+                    value1 = i2[location - 1]
+                    value2 = i2[location + 1]
+                    value = float(value1) / float(value2)
+                    i = i.replace((str(value1) + " / " + str(value2)), ("\"" + str(value) + "\""))
+                elif " % " in i and not "\"" in i:
+                    i2 = i.split(" ")
+                    location = i2.index("%")
+                    value1 = i2[location - 1]
+                    value2 = i2[location + 1]
+                    value = float(value1) % float(value2)
+                    i = i.replace((str(value1) + " % " + str(value2)), ("\"" + str(value) + "\""))
+                elif " + " in i and not "\"" in i:
+                    i2 = i.split(" ")
+                    location = i2.index("+")
+                    value1 = i2[location - 1]
+                    value2 = i2[location + 1]
+                    value = float(value1) + float(value2)
+                    i = i.replace((str(value1) + " + " + str(value2)), ("\"" + str(value) + "\""))
+                elif " - " in i and not "\"" in i:
+                    i2 = i.split(" ")
+                    location = i2.index("-")
+                    value1 = i2[location - 1]
+                    value2 = i2[location + 1]
+                    value = float(value1) - float(value2)
+                    i = i.replace((str(value1) + " - " + str(value2)), ("\"" + str(value) + "\""))
                 if "PRINT" in i:
                     if "\"" in i:
-                        printValue = self.commands[self.commands.index(i)].split(" \"")
+                        printValue = i.split(" \"")
                         printValue.remove(printValue[0])
                         printValueString = ""
                         for s in printValue:
@@ -56,7 +91,7 @@ class Line(object):
                         print(printValueString)
 
                     else:
-                        printValue = self.commands[self.commands.index(i)].split(" ")
+                        printValue = i.split(" ")
                         print(vars[printValue[1]])
 
                 elif "GOTO" in i:
