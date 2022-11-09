@@ -1,6 +1,7 @@
 from pathlib import Path
 import sys
 from random import random
+from math import floor
 
 lines  = {}
 objects = []
@@ -43,50 +44,65 @@ class Line(object):
         if self.check():
             for i in self.commands:
                 i = i.replace("RND(1) ", str(random()))
+                if "INT(" in i:
+                    i2 = i.replace("(", "@")
+                    i2 = i2.replace(")", "@")
+                    i2 = i2.split("@")
+                    value = i2[1]
+                    intValue = floor(float(value))
+                    i = i.replace("INT(" + str(value) + ")", str(intValue))
                 if " ** " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("**")
-                    value1 = i2[location - 1]
-                    value2 = i2[location + 1]
-                    if self.getVar(value1) != None:
-                        value1 = self.getVar(value1)
-                    if self.getVar(value2) != None:
-                        value2 = self.getVar(value2)
+                    value1init = i2[location - 1]
+                    value2init = i2[location + 1]
+                    value1 = value1init
+                    value2 = value2init
+                    if self.getVar(value1init) != None:
+                        value1 = self.getVar(value1init)
+                    if self.getVar(value2init) != None:
+                        value2 = self.getVar(value2init)
                     value = float(value1) ** float(value2)
-                    i = i.replace((str(value1) + " ** " + str(value2)), (" \"" + str(value) + "\""))
+                    i = i.replace((str(value1init) + " ** " + str(value2init)), (" \"" + str(value) + "\""))
                 elif " * " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("*")
-                    value1 = i2[location - 1]
-                    value2 = i2[location + 1]
-                    if self.getVar(value1) != None:
-                        value1 = self.getVar(value1)
-                    if self.getVar(value2) != None:
-                        value2 = self.getVar(value2)
+                    value1init = i2[location - 1]
+                    value2init = i2[location + 1]
+                    value1 = value1init
+                    value2 = value2init
+                    if self.getVar(value1init) != None:
+                        value1 = self.getVar(value1init)
+                    if self.getVar(value2init) != None:
+                        value2 = self.getVar(value2init)
                     value = float(value1) * float(value2)
-                    i = i.replace((str(value1) + " * " + str(value2)), (" \"" + str(value) + "\""))
+                    i = i.replace((str(value1init) + " * " + str(value2init)), (" \"" + str(value) + "\""))
                 elif " / " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("/")
-                    value1 = i2[location - 1]
-                    value2 = i2[location + 1]
-                    if self.getVar(value1) != None:
-                        value1 = self.getVar(value1)
-                    if self.getVar(value2) != None:
-                        value2 = self.getVar(value2)
+                    value1init = i2[location - 1]
+                    value2init = i2[location + 1]
+                    value1 = value1init
+                    value2 = value2init
+                    if self.getVar(value1init) != None:
+                        value1 = self.getVar(value1init)
+                    if self.getVar(value2init) != None:
+                        value2 = self.getVar(value2init)
                     value = float(value1) / float(value2)
-                    i = i.replace((str(value1) + " / " + str(value2)), (" \"" + str(value) + "\""))
+                    i = i.replace((str(value1init) + " / " + str(value2init)), (" \"" + str(value) + "\""))
                 elif " % " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("%")
-                    value1 = i2[location - 1]
-                    value2 = i2[location + 1]
-                    if self.getVar(value1) != None:
-                        value1 = self.getVar(value1)
-                    if self.getVar(value2) != None:
-                        value2 = self.getVar(value2)
+                    value1init = i2[location - 1]
+                    value2init = i2[location + 1]
+                    value1 = value1init
+                    value2 = value2init
+                    if self.getVar(value1init) != None:
+                        value1 = self.getVar(value1init)
+                    if self.getVar(value2init) != None:
+                        value2 = self.getVar(value2init)
                     value = float(value1) % float(value2)
-                    i = i.replace((str(value1) + " % " + str(value2)), (" \"" + str(value) + "\""))
+                    i = i.replace((str(value1init) + " % " + str(value2init)), (" \"" + str(value) + "\""))
                 elif " + " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("+")
@@ -103,14 +119,17 @@ class Line(object):
                 elif " - " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("-")
-                    value1 = i2[location - 1]
-                    value2 = i2[location + 1]
-                    if self.getVar(value1) != None:
-                        value1 = self.getVar(value1)
-                    if self.getVar(value2) != None:
-                        value2 = self.getVar(value2)
+                    value1init = i2[location - 1]
+                    value2init = i2[location + 1]
+                    value1 = value1init
+                    value2 = value2init
+                    if self.getVar(value1init) != None:
+                        value1 = self.getVar(value1init)
+                    if self.getVar(value2init) != None:
+                        value2 = self.getVar(value2init)
                     value = float(value1) - float(value2)
-                    i = i.replace((str(value1) + " - " + str(value2)), (" \"" + str(value) + "\""))
+                    i = i.replace((str(value1init) + " - " + str(value2init)), (" \"" + str(value) + "\""))
+                
                 if "PRINT" in i:
                     if "\"" in i:
                         printValue = i.split(" \"")
@@ -125,14 +144,13 @@ class Line(object):
                     else:
                         printValue = i.split(" ")
                         try:
-                            print(vars[printValue[1]])
-                        except KeyError:
-                            pass
-                        print(printValue[1])
-
-                
-                elif "INPUT()" in i:
-                    input()
+                            try:
+                                printValueString = vars[printValue[1]].replace("\"", "")
+                            except AttributeError:
+                                printValueString = vars[printValue[1]]
+                            print(printValueString)
+                        except:
+                            print(printValue[1])
 
                 elif "GOTO" in i:
                     GOTOLine = i.split(" ")
@@ -147,19 +165,24 @@ class Line(object):
                         vars[i[0]] = i[1].strip()
                         continue
                     elif "INPUT()" in i[1]:
-                        vars[i[0]] = input()
+                        inValue = input()
+                        try: 
+                            inValue = float(inValue)
+                        except:
+                            inValue = "\"" + str(inValue) + "\""
+                        vars[i[0]] = inValue
                     else:
                         try:
-                            float(i[1])
+                            float(i[1].strip())
                             vars[i[0]] = i[1]
                             continue
                         except Exception as error:
                             print("Variable error on line: " + str(self.lineNum))
                             print(error)
-                            ####### Remove Later #######
-                            vars[i[0]] = i[1]
-                            ############################
                     
+                elif "INPUT()" in i:
+                    input()
+
                 elif "REM" in i:
                     pass
 
