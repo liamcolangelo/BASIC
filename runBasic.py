@@ -54,6 +54,16 @@ class Line(object):
                         value = vars[value]
                     intValue = floor(float(value))
                     i = i.replace("INT(" + str(var) + ")", str(intValue))
+                if "STR(" in i:
+                    i2 = i.replace("(", "@")
+                    i2 = i2.replace(")", "@")
+                    i2 = i2.split("@")
+                    value = i2[1]
+                    var = value
+                    if value in vars:
+                        value = vars[value]
+                    stringValue = "\"" + str(value) + "\""
+                    i = i.replace("STR(" + str(var) + ")", stringValue)
                 if " ** " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("**")
@@ -132,7 +142,25 @@ class Line(object):
                         value2 = self.getVar(value2init)
                     value = float(value1) - float(value2)
                     i = i.replace((str(value1init) + " - " + str(value2init)), (" \"" + str(value) + "\""))
-                
+                elif " + " in i:
+                    i2 = i.split(" + ")
+                    value1 = i2[0][(i2[0].index("= ") + 2) :]
+                    value2 = i2[1]
+                    value1init = value1
+                    value2init = value2
+                    value1 = value1.strip()
+                    value2 = value2.strip()
+                    if not "\"" in value1:
+                        value1 = self.getVar(value1)
+                    else:
+                        value1 = value1.replace("\"", "")
+                    if not "\"" in value2:
+                        value2 = self.getVar(value2)
+                    else:
+                        value2 = value2.replace("\"", "")
+                    value = str(value1) + str(value2)
+                    i = i.replace((value1init + " + " + value2init), ("\"" + value + "\""))
+
                 if "PRINT" in i:
                     if "\"" in i:
                         printValue = i.split(" \"")
@@ -162,11 +190,11 @@ class Line(object):
                     break
 
                 elif " = " in i:
+                    i_init = i
                     i = i.split(" = ")
                     if "\"" in i[1]:
                         i[1] = i[1].replace("\"", "")
-                        vars[i[0]] = i[1].strip()
-                        continue
+                        vars[i[0]] = i[1].replace("  ", " ")
                     elif "INPUT()" in i[1]:
                         inValue = input()
                         try: 
@@ -174,17 +202,16 @@ class Line(object):
                         except:
                             inValue = "\"" + str(inValue) + "\""
                         vars[i[0]] = inValue
-                        continue
                     elif i[1] in vars:
                         vars[i[0]] = vars[i[1]]
                     else:
                         try:
                             float(i[1].strip())
                             vars[i[0]] = i[1]
-                            continue
                         except Exception as error:
                             print("Variable error on line: " + str(self.lineNum))
                             print(error)
+                    i = i_init
                     
                 elif "INPUT()" in i:
                     input()
