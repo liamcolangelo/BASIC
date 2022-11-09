@@ -33,6 +33,12 @@ class Line(object):
             for i in line:
                 self.commands.append(i)
 
+    def getVar(self, var):
+        if var in vars:
+            return vars[var]
+        else:
+            return None
+
     def run(self):
         if self.check():
             for i in self.commands:
@@ -42,43 +48,69 @@ class Line(object):
                     location = i2.index("**")
                     value1 = i2[location - 1]
                     value2 = i2[location + 1]
+                    if self.getVar(value1) != None:
+                        value1 = self.getVar(value1)
+                    if self.getVar(value2) != None:
+                        value2 = self.getVar(value2)
                     value = float(value1) ** float(value2)
-                    i = i.replace((str(value1) + " ** " + str(value2)), ("\"" + str(value) + "\""))
-                if " * " in i and not "\"" in i:
+                    i = i.replace((str(value1) + " ** " + str(value2)), (" \"" + str(value) + "\""))
+                elif " * " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("*")
                     value1 = i2[location - 1]
                     value2 = i2[location + 1]
+                    if self.getVar(value1) != None:
+                        value1 = self.getVar(value1)
+                    if self.getVar(value2) != None:
+                        value2 = self.getVar(value2)
                     value = float(value1) * float(value2)
-                    i = i.replace((str(value1) + " * " + str(value2)), ("\"" + str(value) + "\""))
+                    i = i.replace((str(value1) + " * " + str(value2)), (" \"" + str(value) + "\""))
                 elif " / " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("/")
                     value1 = i2[location - 1]
                     value2 = i2[location + 1]
+                    if self.getVar(value1) != None:
+                        value1 = self.getVar(value1)
+                    if self.getVar(value2) != None:
+                        value2 = self.getVar(value2)
                     value = float(value1) / float(value2)
-                    i = i.replace((str(value1) + " / " + str(value2)), ("\"" + str(value) + "\""))
+                    i = i.replace((str(value1) + " / " + str(value2)), (" \"" + str(value) + "\""))
                 elif " % " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("%")
                     value1 = i2[location - 1]
                     value2 = i2[location + 1]
+                    if self.getVar(value1) != None:
+                        value1 = self.getVar(value1)
+                    if self.getVar(value2) != None:
+                        value2 = self.getVar(value2)
                     value = float(value1) % float(value2)
-                    i = i.replace((str(value1) + " % " + str(value2)), ("\"" + str(value) + "\""))
+                    i = i.replace((str(value1) + " % " + str(value2)), (" \"" + str(value) + "\""))
                 elif " + " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("+")
-                    value1 = i2[location - 1]
-                    value2 = i2[location + 1]
+                    value1init = i2[location - 1]
+                    value2init = i2[location + 1]
+                    value1 = value1init
+                    value2 = value2init
+                    if self.getVar(value1init) != None:
+                        value1 = self.getVar(value1init)
+                    if self.getVar(value2init) != None:
+                        value2 = self.getVar(value2init)
                     value = float(value1) + float(value2)
-                    i = i.replace((str(value1) + " + " + str(value2)), ("\"" + str(value) + "\""))
+                    i = i.replace((str(value1init) + " + " + str(value2init)), (" \"" + str(value) + "\""))
                 elif " - " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("-")
                     value1 = i2[location - 1]
                     value2 = i2[location + 1]
+                    if self.getVar(value1) != None:
+                        value1 = self.getVar(value1)
+                    if self.getVar(value2) != None:
+                        value2 = self.getVar(value2)
                     value = float(value1) - float(value2)
-                    i = i.replace((str(value1) + " - " + str(value2)), ("\"" + str(value) + "\""))
+                    i = i.replace((str(value1) + " - " + str(value2)), (" \"" + str(value) + "\""))
                 if "PRINT" in i:
                     if "\"" in i:
                         printValue = i.split(" \"")
@@ -92,7 +124,15 @@ class Line(object):
 
                     else:
                         printValue = i.split(" ")
-                        print(vars[printValue[1]])
+                        try:
+                            print(vars[printValue[1]])
+                        except KeyError:
+                            pass
+                        print(printValue[1])
+
+                
+                elif "INPUT()" in i:
+                    input()
 
                 elif "GOTO" in i:
                     GOTOLine = i.split(" ")
@@ -106,6 +146,8 @@ class Line(object):
                         i[1] = i[1].replace("\"", "")
                         vars[i[0]] = i[1].strip()
                         continue
+                    elif "INPUT()" in i[1]:
+                        vars[i[0]] = input()
                     else:
                         try:
                             float(i[1])
