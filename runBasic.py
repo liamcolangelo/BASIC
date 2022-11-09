@@ -49,8 +49,11 @@ class Line(object):
                     i2 = i2.replace(")", "@")
                     i2 = i2.split("@")
                     value = i2[1]
+                    var = value
+                    if value in vars:
+                        value = vars[value]
                     intValue = floor(float(value))
-                    i = i.replace("INT(" + str(value) + ")", str(intValue))
+                    i = i.replace("INT(" + str(var) + ")", str(intValue))
                 if " ** " in i and not "\"" in i:
                     i2 = i.split(" ")
                     location = i2.index("**")
@@ -171,6 +174,9 @@ class Line(object):
                         except:
                             inValue = "\"" + str(inValue) + "\""
                         vars[i[0]] = inValue
+                        continue
+                    elif i[1] in vars:
+                        vars[i[0]] = vars[i[1]]
                     else:
                         try:
                             float(i[1].strip())
@@ -234,7 +240,7 @@ class Line(object):
             return True
         elif operand == "<>" and second != first:
             return True
-        if type(second) != str and type(second) != str:
+        if type(first) != str and type(second) != str:
             if operand == ">" and first > second:
                 return True
             elif operand == "<" and first < second:
