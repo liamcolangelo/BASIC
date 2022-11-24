@@ -44,7 +44,7 @@ class Line(object):
         if self.check():
             for i in self.commands:
                 i = i.replace("RND(1) ", str(random()))
-                if "INT(" in i:
+                if "INT(" in i and not "PRINT" in i:
                     i2 = i.replace("(", "@")
                     i2 = i2.replace(")", "@")
                     i2 = i2.split("@")
@@ -144,7 +144,12 @@ class Line(object):
                     i = i.replace((str(value1init) + " - " + str(value2init)), (" \"" + str(value) + "\""))
                 elif " + " in i:
                     i2 = i.split(" + ")
-                    value1 = i2[0][(i2[0].index("= ") + 2) :]
+                    if "=" in i2[0]:
+                        i2[0] = i2[0].split(" = ")
+                        i2[0] = i2[0][1]
+                    else:
+                        i2[0] = i2[0][(i2[0].index(" ") + 1) :]
+                    value1 = i2[0]
                     value2 = i2[1]
                     value1init = value1
                     value2init = value2
@@ -195,13 +200,6 @@ class Line(object):
                     if "\"" in i[1]:
                         i[1] = i[1].replace("\"", "")
                         vars[i[0]] = i[1].replace("  ", " ")
-                    elif "INPUT()" in i[1]:
-                        inValue = input()
-                        try: 
-                            inValue = float(inValue)
-                        except:
-                            inValue = "\"" + str(inValue) + "\""
-                        vars[i[0]] = inValue
                     elif i[1] in vars:
                         vars[i[0]] = vars[i[1]]
                     else:
@@ -213,8 +211,15 @@ class Line(object):
                             print(error)
                     i = i_init
                     
-                elif "INPUT()" in i:
-                    input()
+                elif "INPUT(" in i:
+                    i = i.split("(")
+                    i = i[1].split("; ")
+                    if "\"" in i[0]:
+                        printValue = i[0][1:(len(i[0]) - 2)]
+                        inputValue = input(printValue)
+                    else:
+                        inputValue = input()
+                    vars[i[1].strip()] = inputValue
 
                 elif "REM" in i:
                     pass
@@ -247,7 +252,7 @@ class Line(object):
             except:
                 pass
             try:
-                first = int(first)
+                first = float(first)
             except:
                 pass
         else:
@@ -258,7 +263,7 @@ class Line(object):
             except:
                 pass
             try:
-                second = int(second)
+                second = float(second)
             except:
                 pass
         else:
