@@ -2,6 +2,7 @@ from pathlib import Path
 import sys
 from random import random
 from math import floor
+import os
 
 lines  = {}
 objects = []
@@ -287,7 +288,12 @@ class Line(object):
 
 
 if __name__ == "__main__":
-    p = input("Enter BASIC file name: ")
+    p = sys.argv[1]
+    if p == "-help":
+        os.system("less /home/liamcolangelo/BASIC/README.md")
+        sys.exit()
+
+
     p = Path(p)
     file = p.read_text()
 

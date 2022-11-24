@@ -8,7 +8,8 @@ List of commands:
     PRINT: Self-explanatory
     GOTO: Go to a specific line
     Variables are initialized with a "=" sign.
-    IF, THEN statements where a test can include "=" or "<>"(not equal) for strings and numbers. "<", ">", "<=", and ">=" will all work for numbers.
+    IF, THEN statements where a test can include "=" or "<>"(not equal) for strings and numbers. "<",
+        ">", "<=", and ">=" will all work for numbers.
     Math: + - / * % **
     To run a multiple commads on the same line, just separate them with a " : "
     INT(): Floors a floating-point number
@@ -18,3 +19,9 @@ List of commands:
   
 *Note: Lines are separated by individual lines. There is no end-of-line symbol other than a break.*
 **Note: Much of this program relies on spacing. Make sure that there is a SINGLE space separating each part of a line.**
+
+To use:
+    run the python script for interpreting the BASIC file with the name of the BASIC file as a command line argument.
+    Ex) python3 runBasic.py GUESSANUMBER.BAS
+
+    Use -help to open README.md
