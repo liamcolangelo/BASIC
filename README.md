@@ -14,6 +14,7 @@ List of commands:
     INT(): Floors a floating-point number
     STR(): Converts a number into a string
     + can also be used for concatenation between strings and variables.
+    INPUT(MESSAGE); VAR         is used to to take user input. VAR is the variable that it is assigned to. MESSAGE will be printed on the same line before input is taken.
   
 *Note: Lines are separated by individual lines. There is no end-of-line symbol other than a break.*
 **Note: Much of this program relies on spacing. Make sure that there is a SINGLE space separating each part of a line.**
