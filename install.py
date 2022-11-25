@@ -1,7 +1,7 @@
 import os
 
 print("Making directory /usr/bin/basic")
-os.system("mkdir /usr/bin/basic")
+os.system("sudo mkdir /usr/bin/basic")
 print("Making file install.py")
 os.system("sudo cp install.py /usr/bin/basic/install.py")
 print("Making file runBasic.py")
