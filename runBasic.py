@@ -290,7 +290,7 @@ class Line(object):
 if __name__ == "__main__":
     p = sys.argv[1]
     if p == "-help":
-        os.system("less /home/liamcolangelo/BASIC/README.md")
+        os.system("less /usr/bin/basic/README.md")
         sys.exit()
     elif p == "-uninstall":
         os.system("python3 /usr/bin/basic/uninstall.py")
