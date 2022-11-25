@@ -24,5 +24,6 @@ if sure.lower() == "y":
         f.close()
     os.system(". ~/.bashrc")
     print("Finished")
+    os.system("exec bash")
 else:
     print("Cancelled")
