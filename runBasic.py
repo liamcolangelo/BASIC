@@ -292,6 +292,11 @@ if __name__ == "__main__":
     if p == "-help":
         os.system("less /home/liamcolangelo/BASIC/README.md")
         sys.exit()
+    elif p == "-uninstall":
+        os.system("python3 /usr/bin/basic/uninstall.py")
+        sys.exit()
+    else:
+        pass
 
 
     p = Path(p)

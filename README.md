@@ -21,7 +21,11 @@ List of commands:
 **Note: Much of this program relies on spacing. Make sure that there is a SINGLE space separating each part of a line.**
 
 To use:
-    run the python script for interpreting the BASIC file with the name of the BASIC file as a command line argument.
-    Ex) python3 runBasic.py GUESSANUMBER.BAS
+    Ensure that you have python3 installed on your computer
+    Run the install.py script to install the program in /usr/bin/basic
+    Run the python basic interpreter by using the 'basic' command in the terminal followed by the name of the file you want to run.
+    Ex) basic GUESSANUMBER.BAS
+
 
     Use -help to open README.md
+    Use -uninstall to run uninstall.py
