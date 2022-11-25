@@ -17,7 +17,7 @@ if sure.lower() == "y":
     print("Removing basic alias")
     with open(os.path.join(os.path.expanduser('~'), '.bashrc'), 'r') as f:
         file = f.read()
-        file = file.replace("alias basic='python3 /usr/bin/basic/runBasic.py'", "")
+        file = file.replace("\nalias basic='python3 /usr/bin/basic/runBasic.py'", "")
         f.close()
     with open(os.path.join(os.path.expanduser('~'), '.bashrc'), 'w') as f:
         f.write(file)
