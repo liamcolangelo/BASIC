@@ -300,6 +300,7 @@ if __name__ == "__main__":
         sys.exit()
     elif p == "-updateTesting":
         os.system("python3 /usr/bin/basic/updateToTesting.py")
+        sys.exit()
     else:
         pass
 
