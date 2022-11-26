@@ -1,7 +1,7 @@
 import os
 
 print("Downloading updated repository as temporary files")
-os.system("git clone https://github.com/liamcolangelo/BASIC.git tempBASIC")
+os.system("git clone --single-branch --branch testing https://github.com/liamcolangelo/BASIC.git")
 print("Removing old files")
 os.system("sudo rm -r -f -a /usr/bin/basic/.")
 print("Copying new files")

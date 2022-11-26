@@ -298,6 +298,8 @@ if __name__ == "__main__":
     elif p == "-update":
         os.system("python3 /usr/bin/basic/update.py")
         sys.exit()
+    elif p == "-updateTesting":
+        os.system("python3 /usr/bin/basic/updateToTesting.py")
     else:
         pass
 

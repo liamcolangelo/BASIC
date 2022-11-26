@@ -14,6 +14,8 @@ if sure.lower() == "y":
     os.system("sudo rm /usr/bin/basic/uninstall.py")
     print("Uninstalling update.py")
     os.system("sudo rm /usr/bin/basic/update.py")
+    print("Uninstalling updateToTesting.py")
+    os.system("sudo rm /usr/bin/basic/updateToTesting.py")
     print("Removing basic directory")
     os.system("sudo rmdir /usr/bin/basic")
     
