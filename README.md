@@ -37,3 +37,5 @@ Use `basic -help` to open README.md
 Use `basic -uninstall` to run uninstall.py
 
 Use `basic -update` to run update.py
+
+Use `basic -updateTesting` to run updateToTesting.py which will update to a more recent branch that may not yet work.
