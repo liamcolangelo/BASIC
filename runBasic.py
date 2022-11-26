@@ -15,7 +15,7 @@ if __name__ == "__main__":
     elif p == "-updateTesting":
         os.system("python3 /usr/bin/basic/updateToTesting.py")
     elif p == "-example":
-        os.system("python3 runBasic.py /usr/bin/basic/GUESSANUMBER.BAS")
+        os.system("python3 /usr/bin/basic/runBasic.py /usr/bin/basic/GUESSANUMBER.BAS")
     else:    
         objects = []
         p = Path(p)
