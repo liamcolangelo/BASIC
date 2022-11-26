@@ -1,0 +1,16 @@
+import os
+
+print("Downloading updated repository as temporary files")
+os.system("git clone https://github.com/liamcolangelo/BASIC.git tempBASIC")
+os.system("cd tempBASIC")
+print("Copying new files")
+os.system("sudo cp update.py /usr/bin/basic/update.py")
+os.system("sudo cp install.py /usr/bin/basic/install.py")
+os.system("sudo cp uninstall.py /usr/bin/basic/uninstall.py")
+os.system("sudo cp runBasic.py /usr/bin/basic/runBasic.py")
+os.system("sudo cp README.md /usr/bin/basic/README.md")
+os.system("sudo cp GUESSANUMBER.BAS /usr/bin/basic/GUESSANUMBER.BAS")
+print("Removing temporary files")
+os.system("cd ..")
+os.system("rm -r -f BASIC")
+print("Finished")

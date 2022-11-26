@@ -12,8 +12,11 @@ if sure.lower() == "y":
     os.system("sudo rm /usr/bin/basic/runBasic.py")
     print("Uninstalling uninstall.py")
     os.system("sudo rm /usr/bin/basic/uninstall.py")
+    print("Uninstalling update.py")
+    os.system("sudo rm /usr/bin/basic/update.py")
     print("Removing basic directory")
     os.system("sudo rmdir /usr/bin/basic")
+    
     print("Removing basic alias")
     with open(os.path.join(os.path.expanduser('~'), '.bashrc'), 'r') as f:
         file = f.read()

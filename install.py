@@ -12,6 +12,8 @@ print("Making file GUESSANUMBER.BAS")
 os.system("sudo cp GUESSANUMBER.BAS /usr/bin/basic/GUESSANUMBER.BAS")
 print("Making file uninstall.py")
 os.system("sudo cp uninstall.py /usr/bin/basic/uninstall.py")
+print("Making file update.py")
+os.system("sudo cp update.py /usr/bin/basic/update.py")
 print("Making alias basic=python3 /usr/bin/basic/runBasic.py")
 with open(os.path.join(os.path.expanduser('~'), '.bashrc'), 'r') as f:
     file = f.read() + "\n" + "alias basic='python3 /usr/bin/basic/runBasic.py'"
