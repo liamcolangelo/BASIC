@@ -18,6 +18,7 @@ if __name__ == "__main__":
         os.system("python3 /usr/bin/basic/runBasic.py /usr/bin/basic/GUESSANUMBER.BAS")
     elif p == "-install":
         command = "sudo cp " + sys.argv[2] + " /usr/bin/basic/"
+        os.system(command)
     else:    
         objects = []
         p = Path(p)
