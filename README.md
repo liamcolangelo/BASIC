@@ -19,6 +19,7 @@ List of commands:
 * `STR()` : Converts a number into a string
 * `+` can also be used for concatenation between strings and variables.
 * `INPUT(MESSAGE); VAR` : is used to to take user input. VAR is the variable that it is assigned to. MESSAGE will be printed on the same line before input is taken.
+* `INCLUDE "filename without .py"` : will import a python file to extend the default functions with user-created functions.
   
 *Note: Lines are separated by individual lines. There is no end-of-line symbol other than a break.*
 
@@ -41,3 +42,5 @@ Use `basic -update` to run update.py
 Use `basic -updateTesting` to run updateToTesting.py which will update to a more recent branch that may not yet work.
 
 Use `basic -example` to run a guess the number demo
+
+Use `basic -install "filename"` to install a python file which will extend the runBasic.py file.
