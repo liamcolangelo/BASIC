@@ -223,7 +223,7 @@ class Line(object):
 
                 elif "INCLUDE" in i:
                     i = i.split(" ")
-                    includedLibraries.append(import_module("extensions/" + i[1]))
+                    includedLibraries.append(import_module("extensions." + (i[1]).lower()))
 
                 elif includedLibraries:
                     for library in includedLibraries:
