@@ -7,6 +7,8 @@ os.system("sudo mkdir /usr/bin/basic/extensions")
 print("Installing files")
 os.system("sudo cp ./* /usr/bin/basic")
 print("Making alias basic=python3 /usr/bin/basic/runBasic.py")
+os.system("sudo mkdir /usr/bin/basic/extensions")
+os.system("sudo mv exampleExtension.py /usr/bin/basic/extensions/exampleExtension.py")
 with open(os.path.join(os.path.expanduser('~'), '.bashrc'), 'r') as f:
     file = f.read() + "\n" + "alias basic='python3 /usr/bin/basic/runBasic.py'"
     f.close()
