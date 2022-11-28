@@ -2,6 +2,7 @@ import os
 
 print("Making directory /usr/bin/basic")
 os.system("sudo mkdir /usr/bin/basic")
+print("Making directory /usr/bin/basic/extensions")
 print("Installing files")
 os.system("sudo cp ./* /usr/bin/basic")
 print("Making alias basic=python3 /usr/bin/basic/runBasic.py")
