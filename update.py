@@ -3,7 +3,7 @@ import os
 print("Downloading updated repository as temporary files")
 os.system("git clone https://github.com/liamcolangelo/BASIC.git tempBASIC")
 print("Copying extensions")
-os.system("sudo cp /usr/bin/basic/extensions tempExtensions")
+os.system("sudo cp -r /usr/bin/basic/extensions tempExtensions")
 print("Removing old files")
 os.system("sudo rm -r -f /usr/bin/basic/*")
 print("Copying new files")
