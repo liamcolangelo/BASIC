@@ -16,4 +16,4 @@ with open(os.path.join(os.path.expanduser('~'), '.bashrc'), 'w') as f:
 os.system("cd ~")
 os.system(". ~/.bashrc")
 print("Finished")
-os.system("exec bash")
+os.system("exec $SHELL")
