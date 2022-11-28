@@ -1,9 +1,11 @@
 from random import random
 import sys
 from math import floor
+from importlib import import_module
 
 lines  = {}
 vars = {}
+includedLibraries = []
 
 class Line(object):
     def __init__(self, line):
@@ -218,6 +220,17 @@ class Line(object):
                     else:
                         inputValue = input()
                     vars[i[1].strip()] = inputValue
+
+                elif "INCLUDE" in i:
+                    i = i.split(" ")
+                    includedLibraries.append(import_module("extensions." + (i[1]).lower()))
+
+                elif includedLibraries:
+                    for library in includedLibraries:
+                        if library.run(i):
+                            break
+                        else:
+                            continue
 
                 elif "REM" in i:
                     pass
